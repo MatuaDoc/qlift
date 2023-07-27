@@ -1,4 +1,4 @@
-// swift-tools-version:5.8
+// swift-tools-version:5.9
 import PackageDescription
 
 var prefix: String = ""
@@ -53,15 +53,11 @@ let package = Package(
         .library(name: "Qlift", targets: ["Qlift"]),
     ],
     targets: [
-        .target(name: "Qlift", dependencies: ["CQlift"],
+        .target(name: "Qlift",
             cxxSettings: cxxSettings,
+            swiftSettings: [.interoperabilityMode(.Cxx)],
             linkerSettings: linkerSettings
         ),
-        .target(name: "CQlift", dependencies: ["CQt6Widgets"],
-            cxxSettings: cxxSettings,
-            linkerSettings: linkerSettings
-        ),
-        .systemLibrary(name: "CQt6Widgets"),
         .executableTarget(name: "qlift-uic")
     ],
     cxxLanguageStandard: .cxx17
